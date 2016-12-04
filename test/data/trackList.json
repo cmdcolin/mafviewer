@@ -1,1 +1,23 @@
-{"tracks":[{"seqType":"dna","label":"DNA","type":"SequenceTrack","chunkSize":20000,"key":"Reference sequence","urlTemplate":"seq/{refseq_dirpath}/{refseq}-","storeClass":"JBrowse/Store/Sequence/StaticChunked","category":"Reference sequence"}],"formatVersion":1}
+{
+  "tracks": [
+    {
+      "seqType": "dna",
+      "label": "DNA",
+      "type": "SequenceTrack",
+      "chunkSize": 20000,
+      "key": "Reference sequence",
+      "urlTemplate": "seq/{refseq_dirpath}/{refseq}-",
+      "storeClass": "JBrowse/Store/Sequence/StaticChunked",
+      "category": "Reference sequence"
+    },
+    {
+      "label": "MAF",
+      "urlTemplate": "chrI.txt.gz",
+      "storeClass": "MAFPlugin/Store/SeqFeature/MAF",
+      "type": "CanvasFeatures"
+    }
+  ],
+  "formatVersion": 1,
+  "plugins": ["MAFPlugin"],
+  "classicMenu": true
+}
