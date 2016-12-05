@@ -13,7 +13,7 @@ var profile = {
 
     basePath: '../../../src',
     packages: [
-        {name: 'MafPlugin', location: '../plugins/MafPlugin/js' }
+        {name: 'MAFViewer', location: '../plugins/MafPlugin/js' }
     ],
 
     layerOptimize: 'closure',
@@ -21,9 +21,9 @@ var profile = {
     selectorEngine: 'acme',
 
     layers: {
-        'MafPlugin/main': {
+        'MAFViewer/main': {
             include: [
-                'MafPlugin'
+                'MAFViewer'
             ],
             exclude: [ 'JBrowse' ]
         }
@@ -56,7 +56,7 @@ var profile = {
 
         // Files that should not be copied when the “mini” compiler flag is set to true.
         miniExclude: function (filename, mid) {
-            return !(/^MafPlugin/.test(mid));
+            return !(/^MAFViewer/.test(mid));
         }
     }
 };

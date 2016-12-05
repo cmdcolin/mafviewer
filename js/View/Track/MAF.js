@@ -17,7 +17,7 @@ function (
     return declare(CanvasFeatures, {
         _defaultConfig: function () {
             return Util.deepUpdate(lang.clone(this.inherited(arguments)), {
-                glyph: 'MAFPlugin/View/FeatureGlyph/MAF',
+                glyph: 'MAFViewer/View/FeatureGlyph/MAF',
                 showLabels: true,
                 labelWidth: 75,
                 style: {
@@ -31,7 +31,7 @@ function (
             var layout = this.inherited(arguments);
             return declare.safeMixin(layout, {
                 addRect: function (id, left, right, height, data) {
-                    this.pTotalHeight = thisB.config.samples.length / (4 * thisB.config.style.height);
+                    this.pTotalHeight = thisB.config.samples.length * thisB.config.style.height;
                     return this.pTotalHeight;
                 }
             });

@@ -13,8 +13,8 @@
     {
       "label": "MAF",
       "urlTemplate": "chrI.txt.gz",
-      "storeClass": "MAFPlugin/Store/SeqFeature/MAF",
-      "type": "MAFPlugin/View/Track/MAF",
+      "storeClass": "MAFViewer/Store/SeqFeature/MAF",
+      "type": "MAFViewer/View/Track/MAF",
       "samples": [
         "cb4",
         "caeRem4",
@@ -25,6 +25,6 @@
     }
   ],
   "formatVersion": 1,
-  "plugins": ["MAFPlugin"],
+  "plugins": ["MAFViewer"],
   "classicMenu": true
 }
