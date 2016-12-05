@@ -15,22 +15,18 @@ function (
             return this.getConf('style.color', [feature, genotype, genotypeFull]);
         },
         renderFeature: function (context, fRect) {
-            var style = lang.hitch(this, 'getStyle');
-            var color = lang.hitch(this, 'getColor');
-            var height = this._getFeatureHeight(fRect.viewInfo, fRect.f);
             var keys = this.config.samples;
             var vals = fRect.f.get('alignments');
             var thisB = this;
 
-            keys.forEach(function (key, ret) {
+            keys.forEach(function (key, i) {
                 var col;
                 if (vals[key]) {
                     col='red';
                 } else {
                     col='green';
                 }
-                var offset = ret * (style(fRect.f, 'height') + (style(fRect.f, 'offset') || 0));
-                this.renderBox(context, fRect.viewInfo, fRect.f, offset, height, fRect.f, function () { return col; });
+                this.renderBox(context, fRect.viewInfo, fRect.f, i * thisB.config.style.height, thisB.config.style.height, fRect.f, function () { return col; });
             }, this);
 
             return 0;

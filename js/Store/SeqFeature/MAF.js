@@ -25,17 +25,17 @@ function (
             var alignments = {};
             data.forEach(function(elt) {
                 var line = elt.split(':');
-                console.log(line[0]);
                 var org = line[0].split('.')[0];
                 var chr = line[0].split('.')[1];
                 alignments[line[0]] = {
                     chr: chr,
-                    start: line[1],
-                    end: line[2],
-                    data: line[3]
+                    start: +line[1],
+                    srcSize: +line[2],
+                    strand: line[3],
+                    unknown: +line[4],
+                    data: line[5]
                 };
             });
-            console.log(alignments);
 
             var featureData = {
                 start: line.start,

@@ -1,4 +1,4 @@
-div.varianttrack-sublabel {
+div.maftrack-sublabel {
     z-index: 18;
     overflow: hidden;
     cursor: pointer;
@@ -9,7 +9,7 @@ div.varianttrack-sublabel {
     font-weight: bold;
 }
 
-div.varianttrack-sublabel.last {
+div.maftrack-sublabel.last {
     border-bottom: 1px solid #999;
 }
 

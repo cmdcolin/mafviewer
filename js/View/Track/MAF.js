@@ -17,7 +17,12 @@ function (
     return declare(CanvasFeatures, {
         _defaultConfig: function () {
             return Util.deepUpdate(lang.clone(this.inherited(arguments)), {
-                glyph: 'MAFPlugin/View/FeatureGlyph/MAF'
+                glyph: 'MAFPlugin/View/FeatureGlyph/MAF',
+                showLabels: true,
+                labelWidth: 75,
+                style: {
+                    height: 20
+                }
             });
         },
 
@@ -26,8 +31,7 @@ function (
             var layout = this.inherited(arguments);
             return declare.safeMixin(layout, {
                 addRect: function (id, left, right, height, data) {
-                    var ret = thisB.config.samples;
-                    this.pTotalHeight = ret.length / 4 * (thisB.config.style.height + (thisB.config.style.offset || 0));
+                    this.pTotalHeight = thisB.config.samples.length / (4 * thisB.config.style.height);
                     return this.pTotalHeight;
                 }
             });
@@ -37,15 +41,16 @@ function (
             var thisB = this;
             var c = this.config;
 
-            thisB.sublabels = array.map(c.samples, function (key) {
+            thisB.sublabels = array.map(c.samples, function (key, i) {
                 var width = c.labelWidth ? c.labelWidth + 'px' : null;
                 var htmlnode = dojo.create('div', {
-                    className: 'maftrack-sublabel',
+                    className: 'maftrack-sublabel' + (i === c.samples.length - 1 ? ' last' : ''),
                     id: thisB.config.label + '_' + key,
                     style: {
                         position: 'absolute',
-                        height: c.style.height - 1 + 'px',
+                        height: (c.style.height - 1) + 'px',
                         width: c.showLabels ? width : '10px',
+                        top: (i * c.style.height) + 'px',
                         font: c.labelFont
                     },
                     innerHTML: c.showLabels ? key : ''
@@ -59,15 +64,9 @@ function (
 
         updateStaticElements: function (coords) {
             this.inherited(arguments);
-            if (this.sublabels && 'x' in coords) {
-                var height = this.config.style.height + (this.config.style.offset || 0);
-                var len = this.sublabels.length;
+            if ('x' in coords) {
                 array.forEach(this.sublabels, function (sublabel, i) {
                     sublabel.style.left = coords.x + 'px';
-                    sublabel.style.top = i * height + 'px';
-                    if (i === len - 1) {
-                        dojo.addClass(sublabel, 'last');
-                    }
                 });
             }
         }
