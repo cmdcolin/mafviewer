@@ -24,7 +24,8 @@ Then you can bgzip and tabix index this file.
 - samples - an array of species in the MAF file (e.g. hg38, mm10, etc.)
 - labelWidth - an integer width for labels (default: 100)
 - style.matchColor - color to use for matches (default: green)
-- style.mismatchColor - color to use for mismatches (default: red)
+- style.mismatchColor - color to use for mismatches (default: blue)
+- style.gapColor - color to use for gaps in alignment (default: red)
 
 ## Example config
 

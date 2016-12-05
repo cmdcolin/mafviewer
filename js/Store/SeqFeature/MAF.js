@@ -60,7 +60,8 @@ function (
                 seq_id: line.ref,
                 name: fields[3],
                 score: +fields[4],
-                alignments: alignments
+                alignments: alignments,
+                seq: alns[0]
             };
 
             var f = new SimpleFeature({

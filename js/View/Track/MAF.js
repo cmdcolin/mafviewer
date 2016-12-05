@@ -22,8 +22,9 @@ function (
                 labelWidth: 75,
                 style: {
                     height: 20,
-                    mismatchColor: 'red',
-                    matchColor: 'green'
+                    mismatchColor: 'blue',
+                    matchColor: 'green',
+                    gapColor: 'red'
                 }
             });
         },
