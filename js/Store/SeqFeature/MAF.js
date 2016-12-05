@@ -19,7 +19,7 @@ function (
             var data = fields[5].split(',');
             var alignments = {};
             var main = data[0];
-            var aln = main.split(':')[5];
+            var aln = dojo.clone(main.split(':')[5]);
             var alns = data.map(function (elt) {
                 return elt.split(':')[5];
             });
@@ -28,14 +28,15 @@ function (
             for (var i = 0, o = 0; i < aln.length; i++, o++) {
                 if (aln[i] === '-') {
                     for (var j = 0; j < data.length; j++) {
-                        alns[j] = alns[j].slice(0, o - 1) + alns[j].slice(o);
-                        o--;
+                        if (o === 0) {
+                            alns[j] = alns[j].slice(1);
+                        } else {
+                            alns[j] = alns[j].slice(0, o - 1) + alns[j].slice(o);
+                        }
                     }
+                    o--;
                 }
             }
-            // remove extraneous data at start and end of main alignment
-            aln = aln.replace(/^\-+/, '');
-            aln = aln.replace(/\-+$/, '');
 
             data.forEach(function (elt, k) {
                 var ad = elt.split(':');
@@ -49,7 +50,7 @@ function (
                     strand: ad[3],
                     unknown: +ad[4],
                     data: alns[k],
-                    org: ad[5]
+                    orig: ad[5]
                 };
             });
 

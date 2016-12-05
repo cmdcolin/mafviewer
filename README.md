@@ -37,6 +37,10 @@ If all is well, your BED file should have 6 columns, with `chr, start, end, id, 
       ]
     }
 
+## Screenshot
+
+![](img/1.png)
+
 ## Installation
 
 
