@@ -11,42 +11,45 @@ function (
     return declare(BEDTabix, {
         lineToFeature: function (line) {
             var fields = line.fields;
-            for (var i = 0; i < fields.length; i++) {
-                if (fields[i] === '.') {
-                    fields[i] = null;
+            for (var l = 0; l < fields.length; l++) {
+                if (fields[l] === '.') {
+                    fields[l] = null;
                 }
             }
             var data = fields[5].split(',');
             var alignments = {};
             var main = data[0];
             var aln = main.split(':')[5];
-            var s = 0;
-            while (s < aln.length) {
-                if (aln[s] !== '-') {
-                    break;
+            var alns = data.map(function (elt) {
+                return elt.split(':')[5];
+            });
+            // remove extraneous data in other alignments
+            // reason being: cannot represent missing data in main species that are in others)
+            for (var i = 0, o = 0; i < aln.length; i++, o++) {
+                if (aln[i] === '-') {
+                    for (var j = 0; j < data.length; j++) {
+                        alns[j] = alns[j].slice(0, o - 1) + alns[j].slice(o);
+                        o--;
+                    }
                 }
-                s++;
             }
-            var e = aln.length - 1;
-            while (e > 0) {
-                if (aln[e] !== '-') {
-                    break;
-                }
-                e--;
-            }
-            e = aln.length - e;
-            data.slice(1).forEach(function (elt) {
-                var alndata = elt.split(':');
-                var org = alndata[0].split('.')[0];
-                var chr = alndata[0].split('.')[1];
+            // remove extraneous data at start and end of main alignment
+            aln = aln.replace(/^\-+/, '');
+            aln = aln.replace(/\-+$/, '');
+
+            data.forEach(function (elt, k) {
+                var ad = elt.split(':');
+                var org = ad[0].split('.')[0];
+                var chr = ad[0].split('.')[1];
 
                 alignments[org] = {
                     chr: chr,
-                    start: +alndata[1],
-                    srcSize: +alndata[2],
-                    strand: alndata[3],
-                    unknown: +alndata[4],
-                    data: alndata[5].substring(s, alndata[5].length - e)
+                    start: +ad[1],
+                    srcSize: +ad[2],
+                    strand: ad[3],
+                    unknown: +ad[4],
+                    data: alns[k],
+                    org: ad[5]
                 };
             });
 
@@ -55,7 +58,7 @@ function (
                 end: line.end,
                 seq_id: line.ref,
                 name: fields[3],
-                score: fields[4],
+                score: +fields[4],
                 alignments: alignments
             };
 

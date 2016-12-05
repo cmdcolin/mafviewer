@@ -29,10 +29,10 @@ function (
                         var right = fRect.viewInfo.block.bpToX(s + i + 1);
                         if (alignment[i] === '-') {
                             context.fillStyle = 'red';
-                            context.fillRect(left, 7.5 + thisB.config.style.height * pos, right - left + 0.6, 5);
+                            context.fillRect(left, 7.5 + thisB.config.style.height * pos, right - left + 0.4, 5);
                         } else {
                             context.fillStyle = 'green';
-                            context.fillRect(left, 5 + thisB.config.style.height * pos, right - left + 0.6, 10);
+                            context.fillRect(left, 5 + thisB.config.style.height * pos, right - left + 0.4, 10);
                         }
                     }
                 }
