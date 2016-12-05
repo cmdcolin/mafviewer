@@ -40,7 +40,7 @@ var profile = {
 
     resourceTags: {
         // Files that contain test code.
-        test: function (filename, mid) {
+        test: function (/* filename, mid */) {
             return false;
         },
 

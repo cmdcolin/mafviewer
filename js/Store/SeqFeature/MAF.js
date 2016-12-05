@@ -1,20 +1,22 @@
 define([
     'dojo/_base/declare',
-    'JBrowse/Store/SeqFeature/BEDTabix'
+    'JBrowse/Store/SeqFeature/BEDTabix',
+    'JBrowse/Model/SimpleFeature'
 ],
 function (
     declare,
-    BEDTabix
+    BEDTabix,
+    SimpleFeature
 ) {
     return declare(BEDTabix, {
         lineToFeature: function (line) {
-            console.log('here');
             var fields = line.fields;
             for (var i = 0; i < fields.length; i++) {
-                if (fields[i] == '.') {
+                if (fields[i] === '.') {
                     fields[i] = null;
                 }
             }
+            var samples = fields[5].split('\t').map(function (elt) { return elt.split(':')[0]; });
 
             var featureData = {
                 start: line.start,
@@ -22,7 +24,8 @@ function (
                 seq_id: line.ref,
                 name: fields[3],
                 score: fields[4] ? +fields[4] : null,
-                strand: {'+': 1, '-': -1}[fields[5]] || 0
+                alignment: fields[5],
+                samples: samples
             };
 
             var f = new SimpleFeature({
