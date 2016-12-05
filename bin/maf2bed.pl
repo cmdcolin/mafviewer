@@ -21,6 +21,10 @@ while (<STDIN>) {
         $chrom =~ s/$ARGV[0]\.//;
         $start = $line[2];
         $end = $line[2] + $line[3];
+        s/^s //;
+        s/ +/:/g;
+        my $temp = $_;
+        $buffer = $buffer eq '' ? $temp : "$buffer,$temp";
     }
     elsif (/^a/) {
         $score = +(s/^a score=//);
