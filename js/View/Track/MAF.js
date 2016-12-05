@@ -21,7 +21,9 @@ function (
                 showLabels: true,
                 labelWidth: 75,
                 style: {
-                    height: 20
+                    height: 20,
+                    mismatchColor: 'red',
+                    matchColor: 'green'
                 }
             });
         },

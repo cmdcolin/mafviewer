@@ -3,7 +3,7 @@
 A JBrowse plugin for viewing multiple alignments
 
 
-## Setup
+## Prepare data
 
 Convert the MAF into a pseudo-BED format by calling bin/maf2bed.pl
 
@@ -15,7 +15,13 @@ If all is well, your BED file should have 6 columns, with `chr, start, end, id, 
 
 ## Options
 
-Example config
+
+- samples - an array of species in the MAF file (e.g. hg38, mm10, etc.)
+- labelWidth - an integer width for labels (default: 100)
+- style.matchColor - color to use for matches (default: green)
+- style.mismatchColor - color to use for mismatches (default: red)
+
+## Example config
 
     {
       "label": "MAF",
