@@ -9,6 +9,11 @@ function (
     SimpleFeature
 ) {
     return declare(BEDTabix, {
+        constructor: function(args) {
+            this.config.commentCallback = function(r) {
+                console.log(r);
+            }
+        },
         lineToFeature: function (line) {
             var fields = line.fields;
             for (var i = 0; i < fields.length; i++) {
@@ -16,16 +21,29 @@ function (
                     fields[i] = null;
                 }
             }
-            var samples = fields[5].split('\t').map(function (elt) { return elt.split(':')[0]; });
+            var data = fields[5].split(';');
+            var alignments = {};
+            data.forEach(function(elt) {
+                var line = elt.split(':');
+                console.log(line[0]);
+                var org = line[0].split('.')[0];
+                var chr = line[0].split('.')[1];
+                alignments[line[0]] = {
+                    chr: chr,
+                    start: line[1],
+                    end: line[2],
+                    data: line[3]
+                };
+            });
+            console.log(alignments);
 
             var featureData = {
                 start: line.start,
                 end: line.end,
                 seq_id: line.ref,
                 name: fields[3],
-                score: fields[4] ? +fields[4] : null,
-                alignment: fields[5],
-                samples: samples
+                score: fields[4],
+                alignments: alignments,
             };
 
             var f = new SimpleFeature({

@@ -24,7 +24,7 @@ while (<STDIN>) {
     }
     elsif (/^a/) {
         $score = +(s/^a score=//);
-        if($id) {
+        if($id > 0) {
             print $chrom, $start, $end, "$ARGV[0]_$id", $score, $buffer;
         }
         $id += 1;

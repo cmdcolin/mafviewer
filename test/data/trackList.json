@@ -14,7 +14,14 @@
       "label": "MAF",
       "urlTemplate": "chrI.txt.gz",
       "storeClass": "MAFPlugin/Store/SeqFeature/MAF",
-      "type": "CanvasFeatures"
+      "type": "MAFPlugin/View/Track/MAF",
+      "samples": [
+        "cb4",
+        "caeRem4",
+        "caePb3",
+        "caeSp111",
+        "caeJap4"
+      ]
     }
   ],
   "formatVersion": 1,
