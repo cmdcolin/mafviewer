@@ -7,11 +7,16 @@ A JBrowse plugin for viewing multiple alignments
 
 Convert the MAF into a pseudo-BED format by calling bin/maf2bed.pl
 
-    bin/maf2bed.pl hg38 < file.maf > output.bed
+    bin/maf2bed.pl hg38 < file.maf > output.txt
+    bgzip output.txt
+    tabix -p bed output.txt.gz
 
-The second argument is the prefix which is normally the shortname as the genome version.
+The second argument to maf2bed.pl is the genome version e.g. hg38 used for the main species in the MAF. 
 
-If all is well, your BED file should have 6 columns, with `chr, start, end, id, score, alignment_data`, where `alignment_data` is separated between each species by `;` and each field in the alignment is separated by `:`
+If all is well, your BED file should have 6 columns, with `chr, start, end, id, score, alignment_data`, where `alignment_data` is separated between each species by `;` and each field in the alignment is separated by `:`.
+
+Then you can bgzip and tabix index this file.
+
 
 ## Options
 
