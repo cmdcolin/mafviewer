@@ -18,21 +18,36 @@ function (
             }
             var data = fields[5].split(',');
             var alignments = {};
-            data.forEach(function (elt) {
-                console.log(elt);
-                if (elt) {
-                    var line = elt.split(':');
-                    var org = line[0].split('.')[0];
-                    var chr = line[0].split('.')[1];
-                    alignments[org] = {
-                        chr: chr,
-                        start: +line[1],
-                        srcSize: +line[2],
-                        strand: line[3],
-                        unknown: +line[4],
-                        data: line[5]
-                    };
+            var main = data[0];
+            var aln = main.split(':')[5];
+            var s = 0;
+            while (s < aln.length) {
+                if (aln[s] !== '-') {
+                    break;
                 }
+                s++;
+            }
+            var e = aln.length - 1;
+            while (e > 0) {
+                if (aln[e] !== '-') {
+                    break;
+                }
+                e--;
+            }
+            e = aln.length - e;
+            data.slice(1).forEach(function (elt) {
+                var alndata = elt.split(':');
+                var org = alndata[0].split('.')[0];
+                var chr = alndata[0].split('.')[1];
+
+                alignments[org] = {
+                    chr: chr,
+                    start: +alndata[1],
+                    srcSize: +alndata[2],
+                    strand: alndata[3],
+                    unknown: +alndata[4],
+                    data: alndata[5].substring(s, alndata[5].length - e)
+                };
             });
 
             var featureData = {

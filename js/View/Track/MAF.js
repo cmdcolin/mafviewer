@@ -30,7 +30,7 @@ function (
             var thisB = this;
             var layout = this.inherited(arguments);
             return declare.safeMixin(layout, {
-                addRect: function (id, left, right, height, data) {
+                addRect: function (/* id, left, right, height, data */) {
                     this.pTotalHeight = thisB.config.samples.length * thisB.config.style.height;
                     return this.pTotalHeight;
                 }
@@ -65,7 +65,7 @@ function (
         updateStaticElements: function (coords) {
             this.inherited(arguments);
             if ('x' in coords) {
-                array.forEach(this.sublabels, function (sublabel, i) {
+                array.forEach(this.sublabels, function (sublabel) {
                     sublabel.style.left = coords.x + 'px';
                 });
             }

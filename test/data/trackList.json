@@ -16,7 +16,6 @@
       "storeClass": "MAFViewer/Store/SeqFeature/MAF",
       "type": "MAFViewer/View/Track/MAF",
       "samples": [
-        "ce10",
         "cb4",
         "caeRem4",
         "caePb3",

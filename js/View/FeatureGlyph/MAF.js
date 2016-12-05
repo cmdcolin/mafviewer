@@ -26,7 +26,7 @@ function (
                     var alignment = vals[key].data;
                     for (var i = 0; i < alignment.length; i++) {
                         var left = fRect.viewInfo.block.bpToX(s + i);
-                        var right = fRect.viewInfo.block.bpToX(s + i+1);
+                        var right = fRect.viewInfo.block.bpToX(s + i + 1);
                         if (alignment[i] === '-') {
                             context.fillStyle = 'red';
                             context.fillRect(left, 7.5 + thisB.config.style.height * pos, right - left + 0.6, 5);
