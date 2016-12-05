@@ -17,25 +17,26 @@ function (
         renderFeature: function (context, fRect) {
             var keys = this.config.samples;
             var vals = fRect.f.get('alignments');
-            var left  = fRect.viewInfo.block.bpToX(fRect.f.get('start'));
             var thisB = this;
+            var s = fRect.f.get('start');
 
             keys.forEach(function (key) {
                 if (vals[key]) {
                     var pos = thisB.config.samples.indexOf(key);
                     var alignment = vals[key].data;
                     for (var i = 0; i < alignment.length; i++) {
-                        var right = fRect.viewInfo.block.bpToX(fRect.f.get('start') + i);
-                        if (alignment[i] == '-') {
+                        var left = fRect.viewInfo.block.bpToX(s + i);
+                        var right = fRect.viewInfo.block.bpToX(s + i+1);
+                        if (alignment[i] === '-') {
                             context.fillStyle = 'red';
+                            context.fillRect(left, 7.5 + thisB.config.style.height * pos, right - left + 0.6, 5);
                         } else {
                             context.fillStyle = 'green';
+                            context.fillRect(left, 5 + thisB.config.style.height * pos, right - left + 0.6, 10);
                         }
-                        context.fillRect(left, 5 + thisB.config.style.height * pos, right - left, 10);
                     }
                 }
             });
-
             return 0;
         }
     });

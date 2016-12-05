@@ -15,7 +15,7 @@ my $chrom = '';
 
 while (<STDIN>) {
     chomp;
-    my @line = split(' ', $_, -1);
+    my @line = split(' ');
     if (/^s $ARGV[0]/) {
         $chrom = $line[1];
         $chrom =~ s/$ARGV[0]\.//;

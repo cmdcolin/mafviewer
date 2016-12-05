@@ -16,15 +16,22 @@
       "storeClass": "MAFViewer/Store/SeqFeature/MAF",
       "type": "MAFViewer/View/Track/MAF",
       "samples": [
+        "ce10",
         "cb4",
         "caeRem4",
         "caePb3",
         "caeSp111",
         "caeJap4"
       ]
+    },
+    {
+      "label": "MAF CF",
+      "urlTemplate": "chrI.txt.gz",
+      "storeClass": "JBrowse/Store/SeqFeature/BEDTabix",
+      "type": "CanvasFeatures"
     }
   ],
   "formatVersion": 1,
-  "plugins": ["MAFViewer"],
+  "plugins": ["MAFViewer", "HideTrackLabels"],
   "classicMenu": true
 }

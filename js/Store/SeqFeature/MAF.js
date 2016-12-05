@@ -16,9 +16,10 @@ function (
                     fields[i] = null;
                 }
             }
-            var data = fields[5].split(';');
+            var data = fields[5].split(',');
             var alignments = {};
             data.forEach(function (elt) {
+                console.log(elt);
                 if (elt) {
                     var line = elt.split(':');
                     var org = line[0].split('.')[0];
