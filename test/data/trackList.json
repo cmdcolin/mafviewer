@@ -84,5 +84,6 @@
       "HideTrackLabels"
    ],
    "classicMenu" : true,
-   "formatVersion" : 1
+   "formatVersion" : 1,
+   "highResolutionMode": 2
 }
