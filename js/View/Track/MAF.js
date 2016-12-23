@@ -24,7 +24,8 @@ function (
                     height: 20,
                     mismatchColor: 'blue',
                     matchColor: 'green',
-                    gapColor: 'red'
+                    gapColor: 'red',
+                    mismatchFont: 'bold 10px Courier New,monospace'
                 }
             });
         },

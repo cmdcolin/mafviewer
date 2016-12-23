@@ -15,11 +15,20 @@ function (
             return this.getConf('style.color', [type]);
         },
         renderFeature: function (context, fRect) {
+            var feature = fRect.f;
+            var block = fRect.viewInfo.block;
+            var scale = fRect.viewInfo.scale;
+            var charSize = this.getCharacterMeasurements( context );
             var thisB = this;
-            var s = fRect.f.get('start');
+            var s = feature.get('start');
             var h = this.config.style.height;
-            var vals = fRect.f.get('alignments');
-            var seq = fRect.f.get('seq');
+            var vals = feature.get('alignments');
+            var seq = feature.get('seq');
+            r = false;
+            if(scale >= 20) {
+                r = true;
+            }
+            
 
             this.config.samples.forEach(function (key) {
                 if (vals[key]) {
@@ -31,17 +40,59 @@ function (
                         if (alignment[i] === '-') {
                             context.fillStyle = thisB.config.style.gapColor;
                             context.fillRect(left, 3 / 8 * h + h * pos, right - left + 0.6, h / 4);
-                        } else if (seq[i] !== alignment[i]) {
-                            context.fillStyle = thisB.config.style.mismatchColor;
-                            context.fillRect(left, 1 / 4 * h + h * pos, right - left + 0.6, h / 2);
+                            
+
                         } else {
-                            context.fillStyle = thisB.config.style.matchColor;
-                            context.fillRect(left, 1 / 4 * h + h * pos, right - left + 0.6, h / 2);
+                            if (seq[i].toLowerCase() !== alignment[i].toLowerCase()) {
+                                context.fillStyle = thisB.config.style.mismatchColor;
+                                context.fillRect(left, 1 / 4 * h + h * pos, right - left + 0.6, h / 2);
+
+                                if( right-left >= charSize.w) {
+                                    context.font = thisB.config.style.mismatchFont;
+
+                                    context.fillStyle = 'white';
+                                    var offset = ((right-left)-charSize.w)/2+
+                                    context.fillText( alignment[i], left+offset, h/2+h*pos+2, right-left + 0.6, h/2)
+                                }
+                            } else {
+                                context.fillStyle = thisB.config.style.matchColor;
+                                context.fillRect(left, 1 / 4 * h + h * pos, right - left + 0.6, h / 2);
+
+                                
+                            }
+                            if( right-left >= charSize.w) {
+                                context.font = thisB.config.style.mismatchFont;
+
+                                context.fillStyle = 'white';
+                                var offset = ((right-left)-charSize.w)/2+1
+                                context.fillText( alignment[i], left+offset, h/2+h*pos+2, right-left + 0.6, h/2)
+                            }
                         }
                     }
                 }
             });
             return 0;
+        },
+        _defaultConfig: function() {
+            return this._mergeConfigs(dojo.clone(this.inherited(arguments)), {
+                style: {
+                    mismatchFont: 'bold 10px Courier New,monospace'
+                }
+            });
+        },
+
+        getCharacterMeasurements: function( context ) {
+            return this.charSize = this.charSize || function() {
+                var fpx;
+
+                try {
+                    console.log(this.config);
+                    fpx = (this.config.style.mismatchFont.match(/(\d+)px/i)||[])[1];
+                } catch(e) {}
+
+                fpx = fpx || Infinity;
+                return { w: fpx, h: fpx };
+            }.call(this);
         }
     });
 });
