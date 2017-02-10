@@ -23,18 +23,16 @@ function (
             var alns = data.map(function (elt) {
                 return elt.split(':')[5];
             });
+            var alns2 = data.map(function(elt) {
+                return "";
+            });
             // remove extraneous data in other alignments
             // reason being: cannot represent missing data in main species that are in others)
             for (var i = 0, o = 0; i < aln.length; i++, o++) {
-                if (aln[i] === '-') {
+                if (aln[i] !== '-') {
                     for (var j = 0; j < data.length; j++) {
-                        if (o === 0) {
-                            alns[j] = alns[j].slice(1);
-                        } else {
-                            alns[j] = alns[j].slice(0, o - 1) + alns[j].slice(o);
-                        }
+                        alns2[j] += alns[j][i];
                     }
-                    o--;
                 }
             }
 
@@ -49,7 +47,7 @@ function (
                     srcSize: +ad[2],
                     strand: ad[3],
                     unknown: +ad[4],
-                    data: alns[k],
+                    data: alns2[k],
                     orig: ad[5]
                 };
             });
@@ -61,7 +59,7 @@ function (
                 name: fields[3],
                 score: +fields[4],
                 alignments: alignments,
-                seq: alns[0]
+                seq: alns2[0]
             };
 
             var f = new SimpleFeature({

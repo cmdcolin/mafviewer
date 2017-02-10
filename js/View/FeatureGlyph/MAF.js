@@ -34,15 +34,18 @@ function (
                 if (vals[key]) {
                     var pos = thisB.config.samples.indexOf(key);
                     var alignment = vals[key].data;
+                    context.fillStyle = thisB.config.style.gapColor;
                     for (var i = 0; i < alignment.length; i++) {
                         var left = fRect.viewInfo.block.bpToX(s + i);
                         var right = fRect.viewInfo.block.bpToX(s + i + 1);
                         if (alignment[i] === '-') {
-                            context.fillStyle = thisB.config.style.gapColor;
                             context.fillRect(left, 3 / 8 * h + h * pos, right - left + 0.6, h / 4);
-                            
-
-                        } else {
+                        }
+                    }
+                    for (var i = 0; i < alignment.length; i++) {
+                        var left = fRect.viewInfo.block.bpToX(s + i);
+                        var right = fRect.viewInfo.block.bpToX(s + i + 1);
+                        if (alignment[i] !== '-') {
                             if (seq[i].toLowerCase() !== alignment[i].toLowerCase()) {
                                 context.fillStyle = thisB.config.style.mismatchColor;
                                 context.fillRect(left, 1 / 4 * h + h * pos, right - left + 0.6, h / 2);
@@ -86,7 +89,6 @@ function (
                 var fpx;
 
                 try {
-                    console.log(this.config);
                     fpx = (this.config.style.mismatchFont.match(/(\d+)px/i)||[])[1];
                 } catch(e) {}
 
