@@ -64,3 +64,5 @@ The test/data/ directory contains sample data for C. Elegans and 6 worms. Visit 
 ## Notes
 
 Requires JBrowse master branch at time of writing for BEDTabix functionality
+
+Very experimental, feel free to add feedback and expect bugs and slowness!
