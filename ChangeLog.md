@@ -1,7 +1,7 @@
 # Version 0.3.0
 
 - Add store class optimizations to avoid excessive GC
-- Add rendering optimizations to avoid execissive canvas repainting
+- Add rendering optimizations to avoid excessive canvas repainting
 
 # Version 0.2.0
 
