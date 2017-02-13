@@ -18,18 +18,20 @@ function (
             var feature = fRect.f;
             var block = fRect.viewInfo.block;
             var scale = fRect.viewInfo.scale;
-            var charSize = this.getCharacterMeasurements( context );
+            var charSize = this.getCharacterMeasurements(context);
             var s = feature.get('start');
             var h = this.config.style.height;
             var vals = feature.get('alignments');
             var seq = feature.get('seq');
+            var reg = this.track.browser.view.visibleRegion();
+            var rw = reg.end - reg.start;
             r = false;
-            if(scale >= 20) {
+            if (scale >= 20) {
                 r = true;
             }
-            
 
-            for(var j = 0; j < this.config.samples.length; j++) {
+
+            for (var j = 0; j < this.config.samples.length; j++) {
                 var key = this.config.samples[j];
                 if (vals[key]) {
                     var pos = j;
@@ -39,46 +41,53 @@ function (
                     var right = fRect.viewInfo.block.bpToX(s + 1);
                     var delta = right - left;
 
-                    //gaps
+                    // gaps
                     context.fillStyle = this.config.style.gapColor;
                     for (var i = 0; i < alignment.length; i++) {
-                        var l = left + delta*i;
+                        var l = left + delta * i;
                         if (alignment[i] === '-') {
-                            context.fillRect(l, 3 / 8 * h + h * pos, delta + 0.6, h / 4);
+                            if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
+                                context.fillRect(l, 3 / 8 * h + h * pos, delta + 0.6, h / 4);
+                            }
                         }
                     }
-                    //mismatches
+                    // mismatches
                     context.fillStyle = this.config.style.mismatchColor;
                     for (var i = 0; i < alignment.length; i++) {
-                        var l = left + delta*i;
+                        var l = left + delta * i;
                         if (seq[i].toLowerCase() !== alignment[i].toLowerCase() && alignment[i] !== '-') {
-                            context.fillRect(l, 1 / 4 * h + h * pos, delta + 0.6, h / 2);
+                            if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
+                                context.fillRect(l, 1 / 4 * h + h * pos, delta + 0.6, h / 2);
+                            }
                         }
                     }
-                    //matches
+                    // matches
                     context.fillStyle = this.config.style.matchColor;
                     for (var i = 0; i < alignment.length; i++) {
-                        var l = left + delta*i;
+                        var l = left + delta * i;
                         if (seq[i].toLowerCase() === alignment[i].toLowerCase()) {
-                            context.fillRect(l, 1 / 4 * h + h * pos, delta + 0.6, h / 2);
+                            if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
+                                context.fillRect(l, 1 / 4 * h + h * pos, delta + 0.6, h / 2);
+                            }
                         }
-                        
                     }
-                    //font
+                    // font
                     context.font = this.config.style.mismatchFont;
                     context.fillStyle = 'white';
                     for (var i = 0; i < alignment.length; i++) {
-                        var l = left + delta*i;
-                        if( delta >= charSize.w) {
-                            var offset = (delta-charSize.w)/2+1
-                            context.fillText( alignment[i], l+offset, h/2+h*pos+2, delta + 0.6, h/2)
+                        var l = left + delta * i;
+                        if (delta >= charSize.w) {
+                            if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
+                                var offset = (delta - charSize.w) / 2 + 1;
+                                context.fillText(alignment[i], l + offset, h / 2 + h * pos + 2, delta + 0.6, h / 2);
+                            }
                         }
                     }
                 }
             }
             return 0;
         },
-        _defaultConfig: function() {
+        _defaultConfig: function () {
             return this._mergeConfigs(dojo.clone(this.inherited(arguments)), {
                 style: {
                     mismatchFont: 'bold 10px Courier New,monospace'
@@ -86,13 +95,13 @@ function (
             });
         },
 
-        getCharacterMeasurements: function( context ) {
-            return this.charSize = this.charSize || function() {
+        getCharacterMeasurements: function (context) {
+            return this.charSize = this.charSize || function () {
                 var fpx;
 
                 try {
-                    fpx = (this.config.style.mismatchFont.match(/(\d+)px/i)||[])[1];
-                } catch(e) {}
+                    fpx = (this.config.style.mismatchFont.match(/(\d+)px/i) || [])[1];
+                } catch (e) {}
 
                 fpx = fpx || Infinity;
                 return { w: fpx, h: fpx };

@@ -23,8 +23,8 @@ function (
             var alns = data.map(function (elt) {
                 return elt.split(':')[5];
             });
-            var alns2 = data.map(function(elt) {
-                return "";
+            var alns2 = data.map(function (elt) {
+                return '';
             });
             // remove extraneous data in other alignments
             // reason being: cannot represent missing data in main species that are in others)
