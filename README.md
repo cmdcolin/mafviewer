@@ -59,10 +59,10 @@ See JBrowse FAQ on installing plugins
 
 ## Demo
 
-The test/data/ directory contains sample data for C. Elegans and 6 worms. Visit http://localhost/jbrowse/?data=plugins/MAFViewer/test/data to view
+The test/ directory contains sample data for C. Elegans and Medaka. Visit http://localhost/jbrowse/?data=plugins/MAFViewer/test/data or http://localhost/jbrowse/?data=plugins/MAFViewer/test/medaka to view
 
 ## Notes
 
 Requires JBrowse master branch at time of writing for BEDTabix functionality
 
-Very experimental, feel free to add feedback and expect bugs and slowness!
+Feel free to provide feedback!
