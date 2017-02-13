@@ -1,3 +1,7 @@
+# Version 0.4.0
+
+- Further improve rendering by reducing off-screen rendering
+
 # Version 0.3.0
 
 - Add store class optimizations to avoid excessive GC
