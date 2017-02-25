@@ -37,7 +37,7 @@ function (
 
 
             for (var j = 0; j < this.config.samples.length; j++) {
-                var key = this.config.samples[j];
+                var key = lang.isObject(this.config.samples[j]) ? this.config.samples[j].id : this.config.samples[j];
                 if (vals[key]) {
                     var i;
                     var l;

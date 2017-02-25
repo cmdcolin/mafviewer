@@ -28,6 +28,9 @@ Note: you can also stream from a gzipped MAF to the bgzipped bed
 - style.mismatchColor - color to use for mismatches (default: blue)
 - style.gapColor - color to use for gaps in alignment (default: red)
 
+
+Note: samples can be the array of strings like ["hg38","mm10"] or an array of extended JSON structures in order to customize the subtrack labels e.g. `{"id": "hg38", "label": "Human", "description": "Extended description of species", "color": "rgb(255,255,0)" }` 
+
 ## Example config
 
     {

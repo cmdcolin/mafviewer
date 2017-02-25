@@ -4,7 +4,8 @@ define([
     'dojo/_base/lang',
     'dojo/on',
     'JBrowse/View/Track/CanvasFeatures',
-    'JBrowse/Util'
+    'JBrowse/Util',
+    'dijit/Tooltip'
 ],
 function (
     declare,
@@ -12,14 +13,16 @@ function (
     lang,
     on,
     CanvasFeatures,
-    Util
+    Util,
+    Tooltip
 ) {
     return declare(CanvasFeatures, {
         _defaultConfig: function () {
             return Util.deepUpdate(lang.clone(this.inherited(arguments)), {
                 glyph: 'MAFViewer/View/FeatureGlyph/MAF',
-                showLabels: true,
                 labelWidth: 75,
+                showTooltips: true,
+                showLabels: true,
                 style: {
                     height: 20,
                     mismatchColor: 'blue',
@@ -49,17 +52,26 @@ function (
                 var width = c.labelWidth ? c.labelWidth + 'px' : null;
                 var htmlnode = dojo.create('div', {
                     className: 'maftrack-sublabel' + (i === c.samples.length - 1 ? ' last' : ''),
-                    id: thisB.config.label + '_' + key,
+                    id: thisB.config.label + '_' + (lang.isObject(key) ? key.label : key),
                     style: {
                         position: 'absolute',
-                        height: (c.style.height - 1) + 'px',
+                        height: c.style.height - 1 + 'px',
                         width: c.showLabels ? width : '10px',
-                        top: (i * c.style.height) + 'px',
-                        font: c.labelFont
+                        font: c.labelFont,
+                        top: i * c.style.height + 'px',
+                        backgroundColor: lang.isObject(key) ? (key.color ? key.color : 'rgba(255,255,255,0.6)') : 'rgba(255,255,255,0.6)'
                     },
-                    innerHTML: c.showLabels ? key : ''
+                    innerHTML: c.showLabels ? (lang.isObject(key) ? key.label : key) : ''
                 }, thisB.div);
 
+                if (c.showTooltips) {
+                    on(htmlnode, c.clickTooltips ? 'click' : 'mouseover', function () {
+                        Tooltip.show((lang.isObject(key) ? (key.id + '<br />' + key.label||'' + '<br />' + key.description||'') : key), htmlnode);
+                    });
+                    on(htmlnode, 'mouseleave', function () {
+                        Tooltip.hide(htmlnode);
+                    });
+                }
                 return htmlnode;
             });
 
