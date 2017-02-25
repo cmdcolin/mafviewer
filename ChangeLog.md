@@ -1,3 +1,7 @@
+# Version 0.5.0
+
+- Made subpixel rendering more accurate
+
 # Version 0.4.0
 
 - Further improve rendering by reducing off-screen rendering
