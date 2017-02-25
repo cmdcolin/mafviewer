@@ -43,7 +43,18 @@ function (
                         l = left + delta * i;
                         if (alignment[i] === '-') {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
-                                context.fillRect(l, 3 / 8 * h + h * pos, delta + 0.6, h / 4);
+                                context.fillRect(l, 3 / 8 * h + h * pos, delta+0.01, h / 4);
+                            }
+                        }
+                    }
+                    
+                    // matches
+                    context.fillStyle = this.config.style.matchColor;
+                    for (i = 0; i < alignment.length; i++) {
+                        l = left + delta * i;
+                        if (seq[i].toLowerCase() === alignment[i].toLowerCase()) {
+                            if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
+                                context.fillRect(l, 1 / 4 * h + h * pos, delta+0.01, h / 2);
                             }
                         }
                     }
@@ -53,17 +64,7 @@ function (
                         l = left + delta * i;
                         if (seq[i].toLowerCase() !== alignment[i].toLowerCase() && alignment[i] !== '-') {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
-                                context.fillRect(l, 1 / 4 * h + h * pos, delta + 0.6, h / 2);
-                            }
-                        }
-                    }
-                    // matches
-                    context.fillStyle = this.config.style.matchColor;
-                    for (i = 0; i < alignment.length; i++) {
-                        l = left + delta * i;
-                        if (seq[i].toLowerCase() === alignment[i].toLowerCase()) {
-                            if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
-                                context.fillRect(l, 1 / 4 * h + h * pos, delta + 0.6, h / 2);
+                                context.fillRect(l, 1 / 4 * h + h * pos, delta+0.01, h / 2);
                             }
                         }
                     }
