@@ -63,7 +63,9 @@ See JBrowse FAQ on installing plugins
 
 ## Demo
 
-The test/ directory contains sample data for C. Elegans (from UCSC) and Medaka (from Ensembl). Visit http://localhost/jbrowse/?data=plugins/MAFViewer/test/data or http://localhost/jbrowse/?data=plugins/MAFViewer/test/medaka to view
+The test/ directory contains sample data for C. Elegans (from UCSC), Human (from UCSC), Medaka (from Ensembl).
+
+Visit http://localhost/jbrowse/?data=plugins/MAFViewer/test/data or http://localhost/jbrowse/?data=plugins/MAFViewer/test/medaka or http://localhost/jbrowse/?data=plugins/MAFViewer/test/hg38 to view
 
 ## Notes
 
