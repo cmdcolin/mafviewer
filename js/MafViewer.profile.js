@@ -13,7 +13,7 @@ var profile = {
 
     basePath: '../../../src',
     packages: [
-        {name: 'MAFViewer', location: '../plugins/MafPlugin/js' }
+        {name: 'MAFViewer', location: '../plugins/MAFViewer/js' }
     ],
 
     layerOptimize: 'closure',

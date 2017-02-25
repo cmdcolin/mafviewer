@@ -35,7 +35,7 @@ function (
             var layout = this.inherited(arguments);
             return declare.safeMixin(layout, {
                 addRect: function (/* id, left, right, height, data */) {
-                    this.pTotalHeight = thisB.config.samples.length * thisB.config.style.height;
+                    this.pTotalHeight = thisB.config.samples.length * thisB.config.style.height / 4;
                     return this.pTotalHeight;
                 }
             });

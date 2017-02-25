@@ -8,7 +8,7 @@ function (
 ) {
     return declare(JBrowsePlugin, {
         constructor: function (/* args */) {
-            console.log('MafPlugin plugin starting');
+            console.log('MAFViewer plugin starting');
         }
     });
 });
