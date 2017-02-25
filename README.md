@@ -15,8 +15,9 @@ The second argument to maf2bed.pl is the genome version e.g. hg38 used for the m
 
 If all is well, your BED file should have 6 columns, with `chr, start, end, id, score, alignment_data`, where `alignment_data` is separated between each species by `;` and each field in the alignment is separated by `:`.
 
-Then you can bgzip and tabix index this file.
+Note: you can also stream from a gzipped MAF to the bgzipped bed
 
+    gunzip -c chr21.maf.gz | bin/maf2bed.pl hg38 | bgzip > output.txt.gz
 
 ## Options
 
