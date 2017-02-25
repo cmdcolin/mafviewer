@@ -17,12 +17,23 @@ function (
         renderFeature: function (context, fRect) {
             var feature = fRect.f;
             var charSize = this.getCharacterMeasurements(context);
+            var scale = fRect.viewInfo.scale;
             var s = feature.get('start');
             var h = this.config.style.height;
             var vals = feature.get('alignments');
             var seq = feature.get('seq');
             var reg = this.track.browser.view.visibleRegion();
             var rw = reg.end - reg.start;
+
+
+            var correctionFactor = 0;
+            if (scale >= 1) {
+                correctionFactor = 0.6;
+            } else if (scale >= 0.2) {
+                correctionFactor = 0.05;
+            } else if (scale >= 0.02) {
+                correctionFactor = 0.03;
+            }
 
 
             for (var j = 0; j < this.config.samples.length; j++) {
@@ -43,18 +54,18 @@ function (
                         l = left + delta * i;
                         if (alignment[i] === '-') {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
-                                context.fillRect(l, 3 / 8 * h + h * pos, delta+0.01, h / 4);
+                                context.fillRect(l, 3 / 8 * h + h * pos, delta + correctionFactor, h / 4);
                             }
                         }
                     }
-                    
+
                     // matches
                     context.fillStyle = this.config.style.matchColor;
                     for (i = 0; i < alignment.length; i++) {
                         l = left + delta * i;
                         if (seq[i].toLowerCase() === alignment[i].toLowerCase()) {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
-                                context.fillRect(l, 1 / 4 * h + h * pos, delta+0.01, h / 2);
+                                context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
                             }
                         }
                     }
@@ -64,7 +75,7 @@ function (
                         l = left + delta * i;
                         if (seq[i].toLowerCase() !== alignment[i].toLowerCase() && alignment[i] !== '-') {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
-                                context.fillRect(l, 1 / 4 * h + h * pos, delta+0.01, h / 2);
+                                context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
                             }
                         }
                     }
