@@ -23,7 +23,7 @@ function (
             var alns = data.map(function (elt) {
                 return elt.split(':')[5];
             });
-            var alns2 = data.map(function (elt) {
+            var alns2 = data.map(function (/* elt*/) {
                 return '';
             });
             // remove extraneous data in other alignments

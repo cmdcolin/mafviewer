@@ -16,8 +16,6 @@ function (
         },
         renderFeature: function (context, fRect) {
             var feature = fRect.f;
-            var block = fRect.viewInfo.block;
-            var scale = fRect.viewInfo.scale;
             var charSize = this.getCharacterMeasurements(context);
             var s = feature.get('start');
             var h = this.config.style.height;
@@ -25,15 +23,13 @@ function (
             var seq = feature.get('seq');
             var reg = this.track.browser.view.visibleRegion();
             var rw = reg.end - reg.start;
-            r = false;
-            if (scale >= 20) {
-                r = true;
-            }
 
 
             for (var j = 0; j < this.config.samples.length; j++) {
                 var key = this.config.samples[j];
                 if (vals[key]) {
+                    var i;
+                    var l;
                     var pos = j;
                     var alignment = vals[key].data;
 
@@ -43,8 +39,8 @@ function (
 
                     // gaps
                     context.fillStyle = this.config.style.gapColor;
-                    for (var i = 0; i < alignment.length; i++) {
-                        var l = left + delta * i;
+                    for (i = 0; i < alignment.length; i++) {
+                        l = left + delta * i;
                         if (alignment[i] === '-') {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
                                 context.fillRect(l, 3 / 8 * h + h * pos, delta + 0.6, h / 4);
@@ -53,8 +49,8 @@ function (
                     }
                     // mismatches
                     context.fillStyle = this.config.style.mismatchColor;
-                    for (var i = 0; i < alignment.length; i++) {
-                        var l = left + delta * i;
+                    for (i = 0; i < alignment.length; i++) {
+                        l = left + delta * i;
                         if (seq[i].toLowerCase() !== alignment[i].toLowerCase() && alignment[i] !== '-') {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
                                 context.fillRect(l, 1 / 4 * h + h * pos, delta + 0.6, h / 2);
@@ -63,8 +59,8 @@ function (
                     }
                     // matches
                     context.fillStyle = this.config.style.matchColor;
-                    for (var i = 0; i < alignment.length; i++) {
-                        var l = left + delta * i;
+                    for (i = 0; i < alignment.length; i++) {
+                        l = left + delta * i;
                         if (seq[i].toLowerCase() === alignment[i].toLowerCase()) {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
                                 context.fillRect(l, 1 / 4 * h + h * pos, delta + 0.6, h / 2);
@@ -74,8 +70,8 @@ function (
                     // font
                     context.font = this.config.style.mismatchFont;
                     context.fillStyle = 'white';
-                    for (var i = 0; i < alignment.length; i++) {
-                        var l = left + delta * i;
+                    for (i = 0; i < alignment.length; i++) {
+                        l = left + delta * i;
                         if (delta >= charSize.w) {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
                                 var offset = (delta - charSize.w) / 2 + 1;
@@ -95,17 +91,19 @@ function (
             });
         },
 
-        getCharacterMeasurements: function (context) {
-            return this.charSize = this.charSize || function () {
+        getCharacterMeasurements: function (/* context*/) {
+            this.charSize = this.charSize || function () {
                 var fpx;
 
                 try {
                     fpx = (this.config.style.mismatchFont.match(/(\d+)px/i) || [])[1];
-                } catch (e) {}
+                } catch (e) {/* empty */}
 
                 fpx = fpx || Infinity;
                 return { w: fpx, h: fpx };
             }.call(this);
+
+            return this.charSize;
         }
     });
 });
