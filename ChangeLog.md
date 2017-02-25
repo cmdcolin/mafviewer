@@ -1,6 +1,7 @@
 # Version 0.5.0
 
 - Made subpixel rendering more accurate
+- Made it so you can specify full species name in addition to short name, and add colors/tooltips
 
 # Version 0.4.0
 
