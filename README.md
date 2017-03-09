@@ -49,7 +49,9 @@ Note: samples can be the array of strings like ["hg38","mm10"] or an array of ex
 
 ## Screenshot
 
-![](img/1.png)
+[![](img/1.png)](https://raw.githubusercontent.com/cmdcolin/mafviewer/master/img/1.png)
+
+For comparison this is the same region in UCSC browser ([picture](https://raw.githubusercontent.com/cmdcolin/mafviewer/master/img/2.png)) ([link](https://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=cdiesh&hgS_otherUserSessionName=hg38))
 
 ## Installation
 
