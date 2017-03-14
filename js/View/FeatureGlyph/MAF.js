@@ -26,7 +26,7 @@ function (
             var rw = reg.end - reg.start;
 
 
-            var correctionFactor = 0;
+            var correctionFactor = 0.02;
             if (scale >= 1) {
                 correctionFactor = 0.6;
             } else if (scale >= 0.2) {
