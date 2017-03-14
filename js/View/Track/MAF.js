@@ -33,17 +33,6 @@ function (
             });
         },
 
-        _getLayout: function () {
-            var thisB = this;
-            var layout = this.inherited(arguments);
-            return declare.safeMixin(layout, {
-                addRect: function (/* id, left, right, height, data */) {
-                    this.pTotalHeight = thisB.config.samples.length * thisB.config.style.height / 4;
-                    return this.pTotalHeight;
-                }
-            });
-        },
-
         makeTrackLabel: function () {
             var thisB = this;
             var c = this.config;
@@ -85,6 +74,11 @@ function (
                     sublabel.style.left = coords.x + 'px';
                 });
             }
+        },
+        fillBlock: function(args) {
+            this.totalHeight = this.config.samples.length * this.config.style.height;
+            this.heightUpdate(this.totalHeight, args.blockIndex);
+            this.inherited(arguments);
         }
     });
 });
