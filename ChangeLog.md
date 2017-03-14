@@ -1,3 +1,8 @@
+# Version 0.6.0
+
+- Make the glyph look better when zoomed out very far
+- Fix track height in areas where no alignment data is present
+
 # Version 0.5.0
 
 - Made subpixel rendering more accurate
