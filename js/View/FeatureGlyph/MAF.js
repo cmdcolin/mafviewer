@@ -15,15 +15,20 @@ function (
             return this.getConf('style.color', [type]);
         },
         renderFeature: function (context, fRect) {
+
             var feature = fRect.f;
             var charSize = this.getCharacterMeasurements(context);
             var scale = fRect.viewInfo.scale;
             var s = feature.get('start');
+            var e = feature.get('end');
             var h = this.config.style.height;
             var vals = feature.get('alignments');
             var seq = feature.get('seq');
             var reg = this.track.browser.view.visibleRegion();
             var rw = reg.end - reg.start;
+            var lblock = fRect.viewInfo.block.bpToX(s);
+            var rblock = fRect.viewInfo.block.bpToX(e);
+            context.clearRect( lblock, 0, rblock-lblock, this.track.totalHeight );
 
 
             var correctionFactor = 0.02;
@@ -116,6 +121,8 @@ function (
             }.call(this);
 
             return this.charSize;
+        },
+        mouseoverFeature: function() {
         }
     });
 });

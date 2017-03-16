@@ -2,6 +2,7 @@
 
 - Make the glyph look better when zoomed out very far
 - Fix track height in areas where no alignment data is present
+- Fix mouseover clearRect boundaries
 
 # Version 0.5.0
 

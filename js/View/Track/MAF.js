@@ -75,6 +75,18 @@ function (
                 });
             }
         },
+
+
+        // override getLayout to access addRect method
+        _getLayout: function () {
+            var thisB = this;
+            var layout = this.inherited(arguments);
+            return declare.safeMixin(layout, {
+                getTotalHeight: function() {
+                    return thisB.totalHeight;
+                }
+            });
+        },
         fillBlock: function(args) {
             this.totalHeight = this.config.samples.length * this.config.style.height;
             this.heightUpdate(this.totalHeight, args.blockIndex);
