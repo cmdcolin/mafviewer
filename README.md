@@ -11,7 +11,7 @@ Convert the MAF into a pseudo-BED format by calling bin/maf2bed.pl
     bgzip output.txt
     tabix -p bed output.txt.gz
 
-The second argument to maf2bed.pl is the genome version e.g. hg38 used for the main species in the MAF (if your MAF comes from a pipeline like Ensembl or UCSC, the identifiers in the MAF file will say something like hg38.chr1, therefore, the argument to maf2bed.pl should just be hg38 to remove hg38 part of the identifier)
+The second argument to maf2bed.pl is the genome version e.g. hg38 used for the main species in the MAF (if your MAF comes from a pipeline like Ensembl or UCSC, the identifiers in the MAF file will say something like hg38.chr1, therefore, the argument to maf2bed.pl should just be hg38 to remove hg38 part of the identifier. if your MAF file does not include the species name as part of the identifier, you should add the species into them the those scaffold/chromosome e.g. create hg38.chr1 if it was just chr1 before)
 
 If all is well, your BED file should have 6 columns, with `chr, start, end, id, score, alignment_data`, where `alignment_data` is separated between each species by `;` and each field in the alignment is separated by `:`.
 
