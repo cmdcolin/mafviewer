@@ -19,6 +19,9 @@ Note: you can also stream from a gzipped MAF to the bgzipped bed
 
     gunzip -c chr21.maf.gz | bin/maf2bed.pl hg38 | bgzip > output.txt.gz
 
+
+The bin/convert.sh script has a small automatic processing from maf to bgzipped, tabixed, bed.
+
 ## Options
 
 
