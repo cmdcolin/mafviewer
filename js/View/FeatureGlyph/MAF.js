@@ -23,7 +23,7 @@ function (
             var e = feature.get('end');
             var h = this.config.style.height;
             var vals = feature.get('alignments');
-            var seq = feature.get('seq');
+            var seq = feature.get('seq').toLowerCase();
             var reg = this.track.browser.view.visibleRegion();
             var rw = reg.end - reg.start;
             var lblock = fRect.viewInfo.block.bpToX(s);
@@ -47,7 +47,8 @@ function (
                     var i;
                     var l;
                     var pos = j;
-                    var alignment = vals[key].data;
+                    var alignment = vals[key].data.toLowerCase();
+                    var origAlignment = vals[key].data;
 
                     var left = fRect.viewInfo.block.bpToX(s);
                     var right = fRect.viewInfo.block.bpToX(s + 1);
@@ -68,7 +69,7 @@ function (
                     context.fillStyle = this.config.style.matchColor;
                     for (i = 0; i < alignment.length; i++) {
                         l = left + delta * i;
-                        if (seq[i].toLowerCase() === alignment[i].toLowerCase()) {
+                        if (seq[i] === alignment[i]) {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
                                 context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
                             }
@@ -78,7 +79,7 @@ function (
                     context.fillStyle = this.config.style.mismatchColor;
                     for (i = 0; i < alignment.length; i++) {
                         l = left + delta * i;
-                        if (seq[i].toLowerCase() !== alignment[i].toLowerCase() && alignment[i] !== '-') {
+                        if (seq[i] !== alignment[i] && alignment[i] !== '-') {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
                                 context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
                             }
@@ -92,7 +93,7 @@ function (
                         if (delta >= charSize.w) {
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
                                 var offset = (delta - charSize.w) / 2 + 1;
-                                context.fillText(alignment[i], l + offset, h / 2 + h * pos + 2, delta + 0.6, h / 2);
+                                context.fillText(origAlignment[i], l + offset, h / 2 + h * pos + 2, delta + 0.6, h / 2);
                             }
                         }
                     }
