@@ -74,6 +74,6 @@ Visit http://localhost/jbrowse/?data=plugins/MAFViewer/test/data or http://local
 
 ## Notes
 
-Requires JBrowse master branch at time of writing for BEDTabix functionality
+Requires JBrowse 1.12.3 or later for BEDTabix functionality
 
 Feel free to provide feedback!
