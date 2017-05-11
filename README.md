@@ -72,6 +72,15 @@ The test/ directory contains sample data for C. Elegans (from UCSC), Human (from
 
 Visit http://localhost/jbrowse/?data=plugins/MAFViewer/test/data or http://localhost/jbrowse/?data=plugins/MAFViewer/test/medaka or http://localhost/jbrowse/?data=plugins/MAFViewer/test/hg38 to view
 
+
+## Pairwise alignment
+
+You can obtain MAF output from `lastz` using `--format=maf` and then use mafviewer to compare two different genomes
+
+You can also obtain MAF from `mummer` by converting the outputted .delta file to MAF with the delta2maf program (not distributed in the latest mummer versions, you can obtain delta2maf by downloading mugsy from sourceforge and finding delta2maf inside their version of mummer. Then run `delta2maf yourfile.delta > yourfile.maf` note that delta2maf assumes the fasta files are located where the .delta line 1 says they are)
+
+Important: if using MAF files from lastz or mummer here, you should edit the MAF to include the organisms name pre-pended onto the chromosome names, e.g. if it says chr1, add "human.chr1" where relevant. Then the bin/maf2bed.pl program included in this package can be run with `bin/maf2bed.pl human < yourfile.maf > output.bed` which then strips the "human" part of the chromosome identifiers again
+
 ## Notes
 
 Requires JBrowse 1.12.3 or later for BEDTabix functionality
