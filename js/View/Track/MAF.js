@@ -26,6 +26,7 @@ function (
                 style: {
                     height: 20,
                     mismatchColor: 'blue',
+                    showLabels: false,
                     matchColor: 'green',
                     gapColor: 'red',
                     mismatchFont: 'bold 10px Courier New,monospace'
