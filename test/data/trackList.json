@@ -40,6 +40,26 @@
          "label" : "MAF modheight"
       },
       {
+         "label" : "MAF bases",
+         "urlTemplate" : "chrI.txt.gz",
+         "storeClass" : "MAFViewer/Store/SeqFeature/MAF",
+         "style" : {
+            "mismatchBases" : true,
+            "mismatchA": "blue",
+            "mismatchC": "red",
+            "mismatchG": "orange",
+            "mismatchT": "yellow"
+         },
+         "type" : "MAFViewer/View/Track/MAF",
+         "samples" : [
+            "cb4",
+            "caeRem4",
+            "caePb3",
+            "caeSp111",
+            "caeJap4"
+         ]
+      },
+      {
          "label" : "MAF modcolor",
          "urlTemplate" : "chrI.txt.gz",
          "storeClass" : "MAFViewer/Store/SeqFeature/MAF",

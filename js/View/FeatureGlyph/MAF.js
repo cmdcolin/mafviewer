@@ -58,8 +58,8 @@ function (
                     context.fillStyle = this.config.style.gapColor;
                     for (i = 0; i < alignment.length; i++) {
                         l = left + delta * i;
-                        if (alignment[i] === '-') {
-                            if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
+                        if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
+                            if (alignment[i] === '-') {
                                 context.fillRect(l, 3 / 8 * h + h * pos, delta + correctionFactor, h / 4);
                             }
                         }
@@ -69,28 +69,52 @@ function (
                     context.fillStyle = this.config.style.matchColor;
                     for (i = 0; i < alignment.length; i++) {
                         l = left + delta * i;
-                        if (seq[i] === alignment[i]) {
-                            if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
+                        if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
+                            if (seq[i] === alignment[i]) {
                                 context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
                             }
                         }
                     }
                     // mismatches
-                    context.fillStyle = this.config.style.mismatchColor;
-                    for (i = 0; i < alignment.length; i++) {
-                        l = left + delta * i;
-                        if (seq[i] !== alignment[i] && alignment[i] !== '-') {
+                    if(this.config.style.mismatchBases) {
+                        for (i = 0; i < alignment.length; i++) {
+                            l = left + delta * i;
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
-                                context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
+                                if (seq[i] !== alignment[i] && alignment[i] !== '-') {
+                                    if(seq[i] == 'a') {
+                                        context.fillStyle = this.config.style.mismatchA;
+                                        context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
+                                    } else if(seq[i] == 'g') {
+                                        context.fillStyle = this.config.style.mismatchG;
+                                        context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
+                                    }else if(seq[i] == 'c') {
+                                        context.fillStyle = this.config.style.mismatchC;
+                                        context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
+                                    }else if(seq[i] == 't') {
+                                        context.fillStyle = this.config.style.mismatchT;
+                                        context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        context.fillStyle = this.config.style.mismatchColor;
+                        for (i = 0; i < alignment.length; i++) {
+                            l = left + delta * i;
+                            if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
+                                if (seq[i] !== alignment[i] && alignment[i] !== '-') {
+                                    context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
+                                }
                             }
                         }
                     }
+
                     // font
                     context.font = this.config.style.mismatchFont;
                     context.fillStyle = 'white';
-                    for (i = 0; i < alignment.length; i++) {
-                        l = left + delta * i;
-                        if (delta >= charSize.w) {
+                    if (delta >= charSize.w) {
+                        for (i = 0; i < alignment.length; i++) {
+                            l = left + delta * i;
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
                                 var offset = (delta - charSize.w) / 2 + 1;
                                 context.fillText(origAlignment[i], l + offset, h / 2 + h * pos + 2, delta + 0.6, h / 2);
