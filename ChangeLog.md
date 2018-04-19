@@ -1,3 +1,7 @@
+# Version 0.7.0
+
+- Allow coloring mismatches by base (thanks @petersbr)
+
 # Version 0.6.0
 
 - Make the glyph look better when zoomed out very far

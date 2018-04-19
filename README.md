@@ -30,9 +30,10 @@ The bin/convert.sh script has a small automatic processing from maf to bgzipped,
 - style.matchColor - color to use for matches (default: green)
 - style.mismatchColor - color to use for mismatches (default: blue)
 - style.gapColor - color to use for gaps in alignment (default: red)
+- style.mismatchBases - set to true, then you can set style.mismatchA, style.mismatchG, style.mismatchC, style.mismatchT as needed
 
 
-Note: samples can be the array of strings like ["hg38","mm10"] or an array of extended JSON structures in order to customize the subtrack labels e.g. `{"id": "hg38", "label": "Human", "description": "Extended description of species", "color": "rgb(255,255,0)" }` 
+Note: samples can be the array of strings like ["hg38","mm10"] or an array of extended JSON structures in order to customize the subtrack labels e.g. `{"id": "hg38", "label": "Human", "description": "Extended description of species", "color": "rgb(255,255,0)" }`
 
 ## Example config
 
