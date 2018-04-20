@@ -81,16 +81,16 @@ function (
                             l = left + delta * i;
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
                                 if (seq[i] !== alignment[i] && alignment[i] !== '-') {
-                                    if(seq[i] == 'a') {
+                                    if(alignment[i] == 'a') {
                                         context.fillStyle = this.config.style.mismatchA;
                                         context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
-                                    } else if(seq[i] == 'g') {
+                                    } else if(alignment[i] == 'g') {
                                         context.fillStyle = this.config.style.mismatchG;
                                         context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
-                                    }else if(seq[i] == 'c') {
+                                    }else if(alignment[i] == 'c') {
                                         context.fillStyle = this.config.style.mismatchC;
                                         context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
-                                    }else if(seq[i] == 't') {
+                                    }else if(alignment[i] == 't') {
                                         context.fillStyle = this.config.style.mismatchT;
                                         context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
                                     }
