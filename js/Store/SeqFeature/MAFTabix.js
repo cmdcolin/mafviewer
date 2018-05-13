@@ -23,17 +23,17 @@ function (
             var alns = data.map(function (elt) {
                 return elt.split(':')[5];
             });
-            var alns2 = data.map(function (/* elt*/) {
-                return '';
-            });
-            // remove extraneous data in other alignments
-            // reason being: cannot represent missing data in main species that are in others)
-            for (var i = 0, o = 0; i < aln.length; i++, o++) {
-                if (aln[i] !== '-') {
-                    for (var j = 0; j < data.length; j++) {
-                        alns2[j] += alns[j][i];
+
+
+            for (var i = 0; i < aln.length; i++) {
+                if (aln[i] == '-') {
+                    for (var j = 0; j < alns.length; j++) {
+                        alns[j][i] = ';';
                     }
                 }
+            }
+            for(var p = 0; p < alns.length; p++) {
+                alns[p] = alns[p].replace(';','');
             }
 
             data.forEach(function (elt, k) {
@@ -47,7 +47,7 @@ function (
                     srcSize: +ad[2],
                     strand: ad[3],
                     unknown: +ad[4],
-                    data: alns2[k],
+                    data: alns[k],
                     orig: ad[5]
                 };
             });
@@ -59,7 +59,7 @@ function (
                 name: fields[3],
                 score: +fields[4],
                 alignments: alignments,
-                seq: alns2[0]
+                seq: alns[0]
             };
 
             var f = new SimpleFeature({

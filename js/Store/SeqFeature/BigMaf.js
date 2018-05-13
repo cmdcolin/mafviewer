@@ -41,16 +41,15 @@ function (
                         }
                     }
                 }
-                var alns2 = alns.map(function (/* elt*/) {
-                    return '';
-                });
-
-                for (var i = 0, o = 0; i < aln.length; i++, o++) {
-                    if (aln[i] !== '-') {
+                 for (var i = 0; i < aln.length; i++) {
+                    if (aln[i] == '-') {
                         for (var j = 0; j < alns.length; j++) {
-                            alns2[j] += alns[j][i];
+                            alns[j][i] = ';';
                         }
                     }
+                }
+                for(var p = 0; p < alns.length; p++) {
+                    alns[p] = alns[p].replace(';','');
                 }
 
                 for (var k = 0; k < blocks2.length; k++) {
@@ -66,7 +65,7 @@ function (
                         srcSize: +ad[2],
                         strand: ad[3],
                         unknown: +ad[4],
-                        data: alns2[k],
+                        data: alns[k],
                         orig: ad[5]
                     };
                 }
