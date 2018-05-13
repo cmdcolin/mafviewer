@@ -5,7 +5,24 @@ A JBrowse plugin for viewing multiple alignments
 
 ## Prepare data
 
-Convert the MAF into a pseudo-BED format by calling bin/maf2bed.pl
+This program supports two formats
+
+1. BigMaf format, which can be created following UCSC guidelines
+
+2. MAF tabix based format, based on a custom BED created via conversion tools in this repo.
+
+The choice between the two is your convenience. BigMaf is a "standard" UCSC format, basically just a specialized BigBed, so it requires JBrowse 1.14.0 or newer for it's BigBed support. The custom BED format only requires JBrowse 1.12.3 or newer, so therefore some slightly older JBrowse versions can support it.
+
+*Note: Both formats start with a MAF as input, and note that your MAF file should contain the species name and chromosome name e.g. hg38.chr1 in the sequence identifiers.*
+
+### Preparing BigMaf
+
+Follow instructions from https://genome.ucsc.edu/FAQ/FAQformat.html#format9.3 and set the storeType of your track as MAFViewer/View/Track/BigBed
+
+
+### Preparing the tabix BED format
+
+Start by converting the MAF into a pseudo-BED format by calling bin/maf2bed.pl
 
     bin/maf2bed.pl hg38 < file.maf > output.txt
     bgzip output.txt
@@ -19,7 +36,6 @@ Note: you can also stream from a gzipped MAF to the bgzipped bed
 
     gunzip -c chr21.maf.gz | bin/maf2bed.pl hg38 | bgzip > output.txt.gz
 
-
 The bin/convert.sh script has a small automatic processing from maf to bgzipped, tabixed, bed.
 
 ## Options
@@ -31,6 +47,7 @@ The bin/convert.sh script has a small automatic processing from maf to bgzipped,
 - style.mismatchColor - color to use for mismatches (default: blue)
 - style.gapColor - color to use for gaps in alignment (default: red)
 - style.mismatchBases - set to true, then you can set style.mismatchA, style.mismatchG, style.mismatchC, style.mismatchT as needed
+- storeClass - set to MAFViewer/Store/SeqFeature/MAFTabix or MAFViewer/Store/SeqFeature/BigMaf
 
 
 Note: samples can be the array of strings like ["hg38","mm10"] or an array of extended JSON structures in order to customize the subtrack labels e.g. `{"id": "hg38", "label": "Human", "description": "Extended description of species", "color": "rgb(255,255,0)" }`
@@ -40,7 +57,7 @@ Note: samples can be the array of strings like ["hg38","mm10"] or an array of ex
     {
       "label": "MAF",
       "urlTemplate": "chrI.txt.gz",
-      "storeClass": "MAFViewer/Store/SeqFeature/MAF",
+      "storeClass": "MAFViewer/Store/SeqFeature/MAFTabix",
       "type": "MAFViewer/View/Track/MAF",
       "samples": [
         "cb4",

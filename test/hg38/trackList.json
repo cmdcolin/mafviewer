@@ -3,7 +3,7 @@
       {
          "urlTemplate" : "out.txt.gz",
          "label" : "MAF",
-         "storeClass" : "MAFViewer/Store/SeqFeature/MAF",
+         "storeClass" : "MAFViewer/Store/SeqFeature/MAFTabix",
          "samples" : [
             "panTro4",
             "gorGor3",
@@ -112,7 +112,7 @@
          "urlTemplate" : "out.txt.gz",
          "label" : "MAF (full species subtrack labels)",
          "labelWidth": 150,
-         "storeClass" : "MAFViewer/Store/SeqFeature/MAF",
+         "storeClass" : "MAFViewer/Store/SeqFeature/MAFTabix",
          "samples" : [
             {"id": "panTro4", "label": "Chimp", "color": "rgba(255,255,0,0.6)" },
             {"id": "gorGor3", "label": "Gorilla", "color": "rgba(255,255,0,0.6)" },
