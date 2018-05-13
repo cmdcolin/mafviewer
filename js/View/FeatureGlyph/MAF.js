@@ -15,7 +15,6 @@ function (
             return this.getConf('style.color', [type]);
         },
         renderFeature: function (context, fRect) {
-
             var feature = fRect.f;
             var charSize = this.getCharacterMeasurements(context);
             var scale = fRect.viewInfo.scale;
@@ -28,7 +27,7 @@ function (
             var rw = reg.end - reg.start;
             var lblock = fRect.viewInfo.block.bpToX(s);
             var rblock = fRect.viewInfo.block.bpToX(e);
-            context.clearRect( lblock, 0, rblock-lblock, this.track.totalHeight );
+            context.clearRect(lblock, 0, rblock - lblock, this.track.totalHeight);
 
 
             var correctionFactor = 0.02;
@@ -76,21 +75,21 @@ function (
                         }
                     }
                     // mismatches
-                    if(this.config.style.mismatchBases) {
+                    if (this.config.style.mismatchBases) {
                         for (i = 0; i < alignment.length; i++) {
                             l = left + delta * i;
                             if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
                                 if (seq[i] !== alignment[i] && alignment[i] !== '-') {
-                                    if(alignment[i] == 'a') {
+                                    if (alignment[i] == 'a') {
                                         context.fillStyle = this.config.style.mismatchA;
                                         context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
-                                    } else if(alignment[i] == 'g') {
+                                    } else if (alignment[i] == 'g') {
                                         context.fillStyle = this.config.style.mismatchG;
                                         context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
-                                    }else if(alignment[i] == 'c') {
+                                    } else if (alignment[i] == 'c') {
                                         context.fillStyle = this.config.style.mismatchC;
                                         context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
-                                    }else if(alignment[i] == 't') {
+                                    } else if (alignment[i] == 't') {
                                         context.fillStyle = this.config.style.mismatchT;
                                         context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
                                     }
@@ -147,7 +146,7 @@ function (
 
             return this.charSize;
         },
-        mouseoverFeature: function() {
+        mouseoverFeature: function () {
         }
     });
 });

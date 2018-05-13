@@ -56,7 +56,7 @@ function (
 
                 if (c.showTooltips) {
                     on(htmlnode, c.clickTooltips ? 'click' : 'mouseover', function () {
-                        Tooltip.show((lang.isObject(key) ? (key.id + '<br />' + key.label||'' + '<br />' + key.description||'') : key), htmlnode);
+                        Tooltip.show((lang.isObject(key) ? (key.id + '<br />' + key.label || '' + '<br />' + key.description || '') : key), htmlnode);
                     });
                     on(htmlnode, 'mouseleave', function () {
                         Tooltip.hide(htmlnode);
@@ -83,12 +83,12 @@ function (
             var thisB = this;
             var layout = this.inherited(arguments);
             return declare.safeMixin(layout, {
-                getTotalHeight: function() {
+                getTotalHeight: function () {
                     return thisB.totalHeight;
                 }
             });
         },
-        fillBlock: function(args) {
+        fillBlock: function (args) {
             this.totalHeight = this.config.samples.length * this.config.style.height;
             this.heightUpdate(this.totalHeight, args.blockIndex);
             this.inherited(arguments);

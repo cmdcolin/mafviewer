@@ -1,3 +1,7 @@
+# Version 0.8.0
+
+- Add BigMaf support. This is a UCSC format based on BigBed. Requires 1.14.0 on JBrowse. See https://genome.ucsc.edu/FAQ/FAQformat.html#format9.3 for information on generating the bigMAF file format
+
 # Version 0.7.0
 
 - Allow coloring mismatches by base (thanks @petersbr)
