@@ -1,6 +1,8 @@
 # Version 0.8.0
 
 - Add BigMaf support. This is a UCSC format based on BigBed. Requires 1.14.0 on JBrowse. See https://genome.ucsc.edu/FAQ/FAQformat.html#format9.3 for information on generating the bigMAF file format
+- Improve performance significantly
+- Disabled mouseover and click due to glitchyness
 
 # Version 0.7.0
 
