@@ -17,7 +17,7 @@ The choice between the two is your convenience. BigMaf is a "standard" UCSC form
 
 ### Preparing BigMaf
 
-Follow instructions from https://genome.ucsc.edu/FAQ/FAQformat.html#format9.3 and set the storeType of your track as MAFViewer/View/Track/BigMaf
+Follow instructions from https://genome.ucsc.edu/FAQ/FAQformat.html#format9.3 and set the storeType of your track as MAFViewer/Store/SeqFeature/BigMaf
 
 
 ### Preparing the tabix BED format
