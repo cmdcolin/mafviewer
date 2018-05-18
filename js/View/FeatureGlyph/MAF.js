@@ -22,7 +22,7 @@ function (
             var e = feature.get('end');
             var h = this.config.style.height;
             var vals = feature.get('alignments');
-            var seq = feature.get('seq').toLowerCase();
+            var featseq = feature.get('seq').toLowerCase();
             var reg = this.track.browser.view.visibleRegion();
             var rw = reg.end - reg.start;
             var block = fRect.viewInfo.block;
@@ -51,6 +51,7 @@ function (
                     var right = block.bpToX(Math.max(s, block.startBase) + 1);
                     var delta = right - left;
                     var origAlignment = vals[key].data.substr(Math.max(block.startBase - s, 0), Math.min(block.endBase - block.startBase, e-s));
+                    var seq = featseq.substr(Math.max(block.startBase - s, 0), Math.min(block.endBase - block.startBase, e-s));
                     var alignment = origAlignment.toLowerCase();
 
                     // gaps
