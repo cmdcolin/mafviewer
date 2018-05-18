@@ -106,10 +106,8 @@ function (
                     if (delta >= charSize.w) {
                         for (i = 0; i < alignment.length; i++) {
                             l = left + delta * i;
-                            if (s + i > (reg.start - rw / 2) && s + i < (reg.end + rw / 2)) {
-                                var offset = (delta - charSize.w) / 2 + 1;
-                                context.fillText(origAlignment[i], l + offset, h / 2 + h * pos + 2, delta + 0.6, h / 2);
-                            }
+                            var offset = (delta - charSize.w) / 2 + 1;
+                            context.fillText(origAlignment[i], l + offset, h / 2 + h * pos + 2, delta + 0.6, h / 2);
                         }
                     }
                 }
