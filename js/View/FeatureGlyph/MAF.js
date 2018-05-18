@@ -25,8 +25,9 @@ function (
             var seq = feature.get('seq').toLowerCase();
             var reg = this.track.browser.view.visibleRegion();
             var rw = reg.end - reg.start;
-            var lblock = fRect.viewInfo.block.bpToX(s);
-            var rblock = fRect.viewInfo.block.bpToX(e);
+            var block = fRect.viewInfo.block;
+            var lblock = block.bpToX(s);
+            var rblock = block.bpToX(e);
             context.clearRect(lblock, 0, rblock - lblock, this.track.totalHeight);
 
 
@@ -46,12 +47,11 @@ function (
                     var i;
                     var l;
                     var pos = j;
-                    var alignment = vals[key].data.toLowerCase();
-                    var origAlignment = vals[key].data;
-
-                    var left = fRect.viewInfo.block.bpToX(s);
-                    var right = fRect.viewInfo.block.bpToX(s + 1);
+                    var left = block.bpToX(Math.max(s, block.startBase));
+                    var right = block.bpToX(Math.max(s, block.startBase) + 1);
                     var delta = right - left;
+                    var origAlignment = vals[key].data.substr(Math.max(block.startBase - s, 0), Math.min(block.endBase - block.startBase, e-s));
+                    var alignment = origAlignment.toLowerCase();
 
                     // gaps
                     context.fillStyle = this.config.style.gapColor;
