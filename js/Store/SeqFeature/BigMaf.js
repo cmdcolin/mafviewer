@@ -35,6 +35,8 @@ function (
                             strand = x[4];
                             score = x[5];
                             aln = x[6];
+                            alns.push(x[6]);
+                            blocks2.push(blocks[i]);
                         } else {
                             blocks2.push(blocks[i]);
                             alns.push(blocks[i].split(/ +/)[6]);
@@ -52,6 +54,7 @@ function (
                         }
                     }
                 }
+                aln = aln.replace(/-/g,'')
 
                 for (var k = 0; k < blocks2.length; k++) {
                     var elt = blocks2[k];
@@ -66,8 +69,7 @@ function (
                         srcSize: +ad[2],
                         strand: ad[3],
                         unknown: +ad[4],
-                        data: alns2[k],
-                        orig: ad[5]
+                        data: alns2[k]
                     };
                 }
 

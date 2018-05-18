@@ -13,13 +13,14 @@
       {
          "type" : "MAFViewer/View/Track/MAF",
          "samples" : [
+            "ce10",
             "cb4",
             "caeRem4",
             "caePb3",
             "caeSp111",
             "caeJap4"
          ],
-         "storeClass" : "MAFViewer/Store/SeqFeature/MAF",
+         "storeClass" : "MAFViewer/Store/SeqFeature/MAFTabix",
          "urlTemplate" : "chrI.txt.gz",
          "label" : "MAF"
       },

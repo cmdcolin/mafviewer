@@ -47,8 +47,7 @@ function (
                     srcSize: +ad[2],
                     strand: ad[3],
                     unknown: +ad[4],
-                    data: alns2[k],
-                    orig: ad[5]
+                    data: alns2[k]
                 };
             });
 
