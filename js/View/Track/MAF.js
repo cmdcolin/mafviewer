@@ -92,8 +92,6 @@ function (
             this.totalHeight = this.config.samples.length * this.config.style.height;
             this.heightUpdate(this.totalHeight, args.blockIndex);
             this.inherited(arguments);
-        },
-        _attachMouseOverEvents: function() {
         }
     });
 });
