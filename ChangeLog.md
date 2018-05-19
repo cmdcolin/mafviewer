@@ -1,3 +1,7 @@
+# Version 1.0.0
+
+- Add large maxHeight in order to prevent parent CanvasFeautures track from filtering alignments when zoomed out far (issue #16)
+
 # Version 0.9.0
 
 - Accuracy improvements

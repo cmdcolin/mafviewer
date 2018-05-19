@@ -21,6 +21,7 @@ function (
             return Util.deepUpdate(lang.clone(this.inherited(arguments)), {
                 glyph: 'MAFViewer/View/FeatureGlyph/MAF',
                 labelWidth: 75,
+                maxBeight: 15000,
                 showTooltips: true,
                 showLabels: true,
                 style: {
