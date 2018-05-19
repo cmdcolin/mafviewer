@@ -1,13 +1,13 @@
-# Version 0.9.0
-
-- Fix a bug where the match color was drawn over areas even where there was a gap
-- Remove premature and buggy optimization about off-screen drawing
-
 # Version 0.8.0
 
-- Add BigMaf support. This is a UCSC format based on BigBed. Requires 1.14.0 on JBrowse. See https://genome.ucsc.edu/FAQ/FAQformat.html#format9.3 for information on generating the bigMAF file format
-- Improve performance significantly
-- Disabled mouseover and click due to glitchyness
+- Features
+  - Add BigMaf support. This is a UCSC format based on BigBed. Requires 1.14.0 on JBrowse. See https://genome.ucsc.edu/FAQ/FAQformat.html#format9.3 for information on generating the bigMAF file format
+  - Improve performance significantly by only getting the substring to be rendered in each block
+- Bug fixes
+  - Fix a bug where the match color was drawn over areas even where there was a gap
+  - Removed bug related to canvas off-screen drawing that prevented content from being rendered at different zoom levels
+- Changes
+  - Disabled mouseover and click due to glitchyness and performance optimization
 
 # Version 0.7.0
 
