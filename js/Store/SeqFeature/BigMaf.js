@@ -41,7 +41,7 @@ function (
                         }
                     }
                 }
-                aln = aln.replace(/-/g, '');
+                alns = null;
 
                 for (var k = 0; k < blocks2.length; k++) {
                     var elt = blocks2[k];
@@ -66,7 +66,7 @@ function (
                         start: feature.get('start'),
                         end: feature.get('end'),
                         seq_id: feature.get('seq_id'),
-                        seq: aln,
+                        seq: alns2[0],
                         alignments: alignments
                     }
                 }));
