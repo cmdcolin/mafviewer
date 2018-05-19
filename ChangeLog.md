@@ -1,6 +1,7 @@
 # Version 0.9.0
 
 - Accuracy improvements
+- Canvas path based rendering optimization
 
 # Version 0.8.0
 
