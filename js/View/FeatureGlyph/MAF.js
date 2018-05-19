@@ -16,15 +16,12 @@ function (
         },
         renderFeature: function (context, fRect) {
             var feature = fRect.f;
-            var charSize = this.getCharacterMeasurements(context);
             var scale = fRect.viewInfo.scale;
             var s = feature.get('start');
             var e = feature.get('end');
             var h = this.config.style.height;
             var vals = feature.get('alignments');
             var featseq = feature.get('seq').toLowerCase();
-            var reg = this.track.browser.view.visibleRegion();
-            var rw = reg.end - reg.start;
             var block = fRect.viewInfo.block;
             var lblock = block.bpToX(s);
             var rblock = block.bpToX(e);
@@ -41,74 +38,84 @@ function (
             }
 
 
+            var startBase = Math.max(block.startBase - s, 0);
+            var endBase = Math.min(block.endBase - block.startBase, e - s);
+            var left = block.bpToX(Math.max(s, block.startBase));
+            var right = block.bpToX(Math.max(s, block.startBase) + 1);
+            var delta = right - left;
+            var seq = featseq.substr(startBase, endBase);
+
             for (var j = 0; j < this.config.samples.length; j++) {
                 var key = lang.isObject(this.config.samples[j]) ? this.config.samples[j].id : this.config.samples[j];
                 if (vals[key]) {
                     var i;
                     var l;
-                    var pos = j;
-                    var left = block.bpToX(Math.max(s, block.startBase));
-                    var right = block.bpToX(Math.max(s, block.startBase) + 1);
-                    var delta = right - left;
-                    var origAlignment = vals[key].data.substr(Math.max(block.startBase - s, 0), Math.min(block.endBase - block.startBase, e-s));
-                    var seq = featseq.substr(Math.max(block.startBase - s, 0), Math.min(block.endBase - block.startBase, e-s));
+                    var origAlignment = vals[key].data.substr(startBase, endBase);
                     var alignment = origAlignment.toLowerCase();
 
                     // gaps
+                    context.beginPath();
                     context.fillStyle = this.config.style.gapColor;
                     for (i = 0; i < alignment.length; i++) {
                         l = left + delta * i;
                         if (alignment[i] === '-') {
-                            context.fillRect(l, 3 / 8 * h + h * pos, delta + correctionFactor, h / 4);
+                            context.rect(l, 3 / 8 * h + h * j, delta + correctionFactor, h / 4);
                         }
                     }
+                    context.fill();
 
                     // matches
+                    context.beginPath();
                     context.fillStyle = this.config.style.matchColor;
                     for (i = 0; i < alignment.length; i++) {
                         l = left + delta * i;
                         if (seq[i] === alignment[i] && alignment[i] !== '-') {
-                            context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
+                            context.rect(l, 1 / 4 * h + h * j, delta + correctionFactor, h / 2);
                         }
                     }
+                    context.fill();
+
                     // mismatches
                     if (this.config.style.mismatchBases) {
                         for (i = 0; i < alignment.length; i++) {
                             l = left + delta * i;
                             if (seq[i] !== alignment[i] && alignment[i] !== '-') {
-                                if (alignment[i] == 'a') {
+                                if (alignment[i] === 'a') {
                                     context.fillStyle = this.config.style.mismatchA;
-                                    context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
-                                } else if (alignment[i] == 'g') {
+                                    context.fillRect(l, 1 / 4 * h + h * j, delta + correctionFactor, h / 2);
+                                } else if (alignment[i] === 'g') {
                                     context.fillStyle = this.config.style.mismatchG;
-                                    context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
-                                } else if (alignment[i] == 'c') {
+                                    context.fillRect(l, 1 / 4 * h + h * j, delta + correctionFactor, h / 2);
+                                } else if (alignment[i] === 'c') {
                                     context.fillStyle = this.config.style.mismatchC;
-                                    context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
-                                } else if (alignment[i] == 't') {
+                                    context.fillRect(l, 1 / 4 * h + h * j, delta + correctionFactor, h / 2);
+                                } else if (alignment[i] === 't') {
                                     context.fillStyle = this.config.style.mismatchT;
-                                    context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
+                                    context.fillRect(l, 1 / 4 * h + h * j, delta + correctionFactor, h / 2);
                                 }
                             }
                         }
                     } else {
+                        context.beginPath();
                         context.fillStyle = this.config.style.mismatchColor;
                         for (i = 0; i < alignment.length; i++) {
                             l = left + delta * i;
                             if (seq[i] !== alignment[i] && alignment[i] !== '-') {
-                                context.fillRect(l, 1 / 4 * h + h * pos, delta + correctionFactor, h / 2);
+                                context.rect(l, 1 / 4 * h + h * j, delta + correctionFactor, h / 2);
                             }
                         }
+                        context.fill();
                     }
 
                     // font
                     context.font = this.config.style.mismatchFont;
                     context.fillStyle = 'white';
+                    var charSize = this.getCharacterMeasurements();
                     if (delta >= charSize.w) {
                         for (i = 0; i < alignment.length; i++) {
                             l = left + delta * i;
                             var offset = (delta - charSize.w) / 2 + 1;
-                            context.fillText(origAlignment[i], l + offset, h / 2 + h * pos + 2, delta + 0.6, h / 2);
+                            context.fillText(origAlignment[i], l + offset, h / 2 + h * j + 2, delta + 0.6, h / 2);
                         }
                     }
                 }

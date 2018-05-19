@@ -1,3 +1,3 @@
-define( ['MAFViewer/Store/SeqFeature/MAFTabix'], function( maf ){
-  return maf;
+define(['MAFViewer/Store/SeqFeature/MAFTabix'], function (maf) {
+    return maf;
 });

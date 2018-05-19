@@ -35,6 +35,7 @@ function (
                     }
                 }
             }
+            alns = null;
 
             data.forEach(function (elt, k) {
                 var ad = elt.split(':');

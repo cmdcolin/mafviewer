@@ -2,9 +2,16 @@
    "tracks" : [
       {
          "urlTemplate" : "out.txt.gz",
+         "label" : "MAF_canvasfeatures",
+         "storeClass" : "MAFViewer/Store/SeqFeature/MAFTabix",
+         "type": "CanvasFeatures"
+      },
+      {
+         "urlTemplate" : "out.txt.gz",
          "label" : "MAF",
          "storeClass" : "MAFViewer/Store/SeqFeature/MAFTabix",
          "samples" : [
+            "hg38",
             "panTro4",
             "gorGor3",
             "ponAbe2",
@@ -114,6 +121,7 @@
          "labelWidth": 150,
          "storeClass" : "MAFViewer/Store/SeqFeature/MAFTabix",
          "samples" : [
+            {"id": "hg38", "label": "Human", "color": "rgba(255,255,0,0.6)" },
             {"id": "panTro4", "label": "Chimp", "color": "rgba(255,255,0,0.6)" },
             {"id": "gorGor3", "label": "Gorilla", "color": "rgba(255,255,0,0.6)" },
             {"id": "ponAbe2", "label": "Orangutan", "color": "rgba(255,255,0,0.6)" },
