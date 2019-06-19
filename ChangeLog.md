@@ -1,3 +1,7 @@
+# Version 1.0.1
+
+- Add fix for JBrowse post 1.16.0 which changed the lineToFeature API
+
 # Version 1.0.0
 
 - Add large maxHeight in order to prevent parent CanvasFeautures track from filtering alignments when zoomed out far (issue #16)
