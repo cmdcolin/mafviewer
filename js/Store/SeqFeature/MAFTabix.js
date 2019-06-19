@@ -9,8 +9,21 @@ function (
     SimpleFeature
 ) {
     return declare(BEDTabix, {
-        lineToFeature: function (line) {
-            var fields = line.fields;
+        lineToFeature: function (columnNumbers, line) {
+            const oldVersion = line === undefined // old lineToFeature API only passes one argument
+            var fields
+            var line_start,line_end,line_ref
+            if(oldVersion) {
+                fields = columnNumbers.fields
+                line_start=columnNumbers.start
+                line_end=columnNumbers.end
+                line_ref=columnNumbers.ref
+            } else {
+                fields = line.split('\t')
+                line_start = +fields[columnNumbers.start-1]
+                line_end = +fields[columnNumbers.end-1]
+                line_ref = fields[columnNumbers.ref-1]
+            }
             for (var l = 0; l < fields.length; l++) {
                 if (fields[l] === '.') {
                     fields[l] = null;
@@ -53,9 +66,9 @@ function (
             });
 
             var featureData = {
-                start: line.start,
-                end: line.end,
-                seq_id: line.ref,
+                start: line_start,
+                end: line_end,
+                seq_id: line_ref,
                 name: fields[3],
                 score: +fields[4],
                 alignments: alignments,
