@@ -99,6 +99,12 @@ You can also obtain MAF from `mummer` by converting the outputted .delta file to
 
 Important: if using MAF files from lastz or mummer here, you should edit the MAF to include the organisms name pre-pended onto the chromosome names, e.g. if it says chr1, add "human.chr1" where relevant. Then the bin/maf2bed.pl program included in this package can be run with `bin/maf2bed.pl human < yourfile.maf > output.bed` which then strips the "human" part of the chromosome identifiers again
 
+## Multiple alignment
+
+For performing multiple alignment, https://github.com/medvedevgroup/SibeliaZ is an option
+
+Alternatively, you can use the classic TBA/Multiz pipeline from UCSC, e.g. http://shiulab.plantbiology.msu.edu/index.php?title=SyntenicBlocks. I have not evaluated either of these pipelines, but the main goal is that resulting alignments must be non-overlapping for mafviewer to properly display them
+
 ## Notes
 
 Requires JBrowse 1.12.3 or later for BEDTabix functionality
