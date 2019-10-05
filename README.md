@@ -109,4 +109,6 @@ Alternatively, you can use the classic TBA/Multiz pipeline from UCSC, e.g. http:
 
 Requires JBrowse 1.12.3 or later for BEDTabix functionality
 
+Requires the alignment chunks to be non-overlapping (it will plot overlapping chunks of the MAF file over each other on the same line see https://github.com/cmdcolin/mafviewer/issues/7)
+
 Feel free to provide feedback!
