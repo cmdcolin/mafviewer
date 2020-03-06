@@ -10,19 +10,19 @@ function (
 ) {
     return declare(BEDTabix, {
         lineToFeature: function (columnNumbers, line) {
-            const oldVersion = line === undefined // old lineToFeature API only passes one argument
-            var fields
-            var line_start,line_end,line_ref
-            if(oldVersion) {
-                fields = columnNumbers.fields
-                line_start=columnNumbers.start
-                line_end=columnNumbers.end
-                line_ref=columnNumbers.ref
+            const oldVersion = line === undefined; // old lineToFeature API only passes one argument
+            var fields;
+            var line_start, line_end, line_ref;
+            if (oldVersion) {
+                fields = columnNumbers.fields;
+                line_start = columnNumbers.start;
+                line_end = columnNumbers.end;
+                line_ref = columnNumbers.ref;
             } else {
-                fields = line.split('\t')
-                line_start = +fields[columnNumbers.start-1]
-                line_end = +fields[columnNumbers.end-1]
-                line_ref = fields[columnNumbers.ref-1]
+                fields = line.split('\t');
+                line_start = +fields[columnNumbers.start - 1];
+                line_end = +fields[columnNumbers.end - 1];
+                line_ref = fields[columnNumbers.ref - 1];
             }
             for (var l = 0; l < fields.length; l++) {
                 if (fields[l] === '.') {

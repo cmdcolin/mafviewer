@@ -15,6 +15,7 @@ my $chrom = '';
 
 while (<STDIN>) {
     chomp;
+    next if /^$/;
     my @line = split(' ');
     if (/^s $ARGV[0]/) {
         $chrom = $line[1];
@@ -34,7 +35,7 @@ while (<STDIN>) {
         $id += 1;
         $buffer = '';
     }
-    
+
     elsif (/^s/) {
         s/^s //;
         s/ +/:/g;
@@ -42,3 +43,4 @@ while (<STDIN>) {
         $buffer = $buffer eq '' ? $temp : "$buffer,$temp";
     }
 }
+print $chrom, $start, $end, "$ARGV[0]_$id", $score, $buffer;

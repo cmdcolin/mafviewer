@@ -1,3 +1,6 @@
+- Add fix for JBrowse 13+ stylesheets in main.css
+- Fix off-by-one in maf2bed not outputting last row
+
 # Version 1.0.1
 
 - Add fix for JBrowse post 1.16.0 which changed the lineToFeature API
