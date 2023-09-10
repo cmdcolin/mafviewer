@@ -81,7 +81,7 @@ systems, use of Latin-1 or Unicode are recommended.
 Fields
 
 Fields are tab-separated. Also, all but the final field in each feature line
-must contain a valu; "empty" columns are denoted with a '.'
+must contain a value; "empty" columns are denoted with a '.'
 
    seqid     - The ID of the landmark used to establish the coordinate system for the current
                feature. IDs may contain any characters, but must escape any characters not in
