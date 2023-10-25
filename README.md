@@ -1,6 +1,8 @@
 # mafviewer
 
-A JBrowse plugin for viewing multiple alignments
+A JBrowse 1 plugin for viewing multiple alignments. 
+
+Note: See https://github.com/cmdcolin/jbrowse-plugin-mafviewer for JBrowse 2 version!
 
 
 ## Prepare data
